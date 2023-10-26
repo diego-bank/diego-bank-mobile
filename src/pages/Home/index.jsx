@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Logo } from './styles'
 
-function Welcome() {
+function Home() {
     return(
         <Container>
             <Logo source={require('../../../assets/logo.png')} />
@@ -9,4 +9,4 @@ function Welcome() {
     )
 };
 
-export default Welcome;
+export default Home;

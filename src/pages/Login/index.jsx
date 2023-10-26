@@ -4,8 +4,7 @@ import Button from "../../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import TextInputStyled from "../../components/TextInputStyled";
 
-import axios from 'axios';
-// import { api } from '../../services/api'
+import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
 
 function Login() {
@@ -22,9 +21,10 @@ function Login() {
     };
 
     async function login() {
-        await axios.post('https://6b48-189-57-188-42.ngrok.io/api/token/', {
-            'email': email,
-            'password': password
+
+        response = await api.post('api/token/', {
+            "email": email,
+            "password": password
         })
         .then((response) => {
             const accessToken = response.data.access;
@@ -36,6 +36,8 @@ function Login() {
         .catch((e) => {
             console.log(e);
         })
+
+        console.log(response);
     }
 
     return(
