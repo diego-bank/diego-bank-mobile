@@ -22,7 +22,7 @@ function Login() {
 
     async function login() {
 
-        response = await api.post('api/token/', {
+        await api.post('api/token/', {
             "email": email,
             "password": password
         })
@@ -36,8 +36,6 @@ function Login() {
         .catch((e) => {
             console.log(e);
         })
-
-        console.log(response);
     }
 
     return(

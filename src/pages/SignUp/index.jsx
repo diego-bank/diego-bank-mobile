@@ -19,9 +19,9 @@ function SignUp() {
     return(
         <Container>
             <Logo source={require('../../../assets/logo.png')} />
-            <Input label={'Name'} type={'default'}/>
+            <Input label={'First Name'} type={'default'}/>
+            <Input label={'Last Name'} type={'default'}/>
             <Input label={'CPF'} type={'numeric'}/>
-            <Input label={'Date'} type={'date'}/>
             <Input label={'Password'} type={'visible-password'} secure={true}/>
             <StyledText>
                 To login, click 
