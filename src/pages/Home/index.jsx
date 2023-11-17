@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, Logo } from './styles'
+import { Container, Logo, LogoSmall, Main, StyledTitle } from './styles'
+
+import Header from '../../components/Header'
+import Icon from '../../components/Icon'
 
 import { api } from '../../services/api'
 import { useUserStore } from '../../stores/userStore'
@@ -7,12 +10,17 @@ import { useAccountStore } from '../../stores/accountStore'
 import { useAuthStore } from "../../stores/authStore";
 import TitleStyled from "../../components/TitleStyled";
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
 function Home() {
     const [loading, setLoading] = useState(true);
     const setUserInformation = useUserStore(state => state.setUserInformation);
     const setAccountInformation = useAccountStore(state => state.setAccountInformation);
     const accessToken = useAuthStore(state => state.accessToken)
     const first_name = useUserStore(state => state.first_name);
+    const agency = useAccountStore(state => state.agency)
+    const accountNumber = useAccountStore(state => state.number)
+    const balance = useAccountStore(state => state.balance)
 
     useEffect(() => {
 
@@ -96,7 +104,17 @@ function Home() {
             {loading ? (
                 <Logo source={require('../../../assets/logo.png')} />
             ) : (
-                <TitleStyled color={'#fff'} text={`Bem vindo ${first_name}`} />
+                <>
+                <Header>
+                        <LogoSmall source={require('../../../assets/logo.png')} />
+                        <FontAwesome name="user" size={30} color="#ffffff" onPress={() => {}}/>
+                </Header>
+                <Main>
+                        <StyledTitle>
+                            Bem Vindo, {first_name}
+                        </StyledTitle>
+                </Main>
+                </>
             )}
             
         </Container>
