@@ -4,8 +4,8 @@ export const StyledIcon = styled.View`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75px;
-    width: 75px;
+    height: 65px;
+    width: 65px;
     border-radius: 10px;
     background-color: ${props => props.color};
 `

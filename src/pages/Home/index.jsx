@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Logo, LogoSmall, Main, StyledTitle, InfoView, InfoBox, InfoMin, InfoMax, StyledText, IconBanner, IconInfo, StyledIcon, List } from './styles'
 
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
 
 import Header from '../../components/Header'
 import Icon from '../../components/Icon'
@@ -14,17 +14,25 @@ import { useAuthStore } from "../../stores/authStore";
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
+import { useFocusEffect } from "@react-navigation/native";
 
 function Home() {
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([])
+
     const setUserInformation = useUserStore(state => state.setUserInformation);
     const setAccountInformation = useAccountStore(state => state.setAccountInformation);
-    const accessToken = useAuthStore(state => state.accessToken)
-    const first_name = useUserStore(state => state.first_name);
     const agency = useAccountStore(state => state.agency)
     const accountNumber = useAccountStore(state => state.number)
     const balance = useAccountStore(state => state.balance)
+
+    const accessToken = useAuthStore(state => state.accessToken)
+
+    const first_name = useUserStore(state => state.first_name);
+
+    const {navigate} = useNavigation()
 
     async function userInfo() {
         await api.get('api/v1/user/me/', {
@@ -113,15 +121,21 @@ function Home() {
         })
     }
 
-    // useEffect(() => {
-    //     console.log(transactions)
-    // }, [transactions])
-
-    useEffect(() => {
-
+    useFocusEffect(
+        React.useCallback(() => {
         userInfo()
-
     }, [])
+    )
+
+    // navigations
+
+    function handleNavigationDeposit() {
+        navigate('Deposit');
+    };
+
+    function handleNavigationWithdraw() {
+        navigate('Withdraw');
+    };
 
     return(
         <Container>
@@ -168,7 +182,7 @@ function Home() {
                         <IconBanner>
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <MaterialCommunityIcons name="bank-transfer" size={60} color="#ffffff" />
+                                    <MaterialCommunityIcons name="bank-transfer" size={50} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Transaction
@@ -177,7 +191,7 @@ function Home() {
 
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <MaterialCommunityIcons name="bank-transfer-in" size={60} color="#ffffff" />
+                                    <MaterialCommunityIcons onPress={() => handleNavigationDeposit()} name="bank-transfer-in" size={50} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Deposit
@@ -186,7 +200,7 @@ function Home() {
 
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <MaterialCommunityIcons name="bank-transfer-out" size={60} color="#ffffff" />
+                                    <MaterialCommunityIcons onPress={() => handleNavigationWithdraw()} name="bank-transfer-out" size={50} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Withdraw
@@ -195,7 +209,7 @@ function Home() {
 
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <FontAwesome5 name="hand-holding-usd" size={40} color="#ffffff" />
+                                    <FontAwesome5 name="hand-holding-usd" size={30} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Loan
@@ -204,7 +218,7 @@ function Home() {
  
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <MaterialCommunityIcons name="card-bulleted" size={60} color="#ffffff" />
+                                    <MaterialCommunityIcons name="card-bulleted" size={50} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Card
@@ -221,22 +235,22 @@ function Home() {
                         <FlatList 
                         style={{flex: 1}}
                         data={transactions}
-                        // ListHeaderComponent={
-                        //     <IconBanner>
-                        //         <StyledTitle>
-                        //             Name
-                        //         </StyledTitle>
-                        //         <StyledTitle>
-                        //             Description
-                        //         </StyledTitle>
-                        //         <StyledTitle>
-                        //             Timestamp
-                        //         </StyledTitle>
-                        //         <StyledTitle>
-                        //             Value
-                        //         </StyledTitle>
-                        //     </IconBanner>
-                        // }
+                        ListHeaderComponent={
+                            <IconBanner>
+                                <StyledTitle>
+                                    Name
+                                </StyledTitle>
+                                <StyledTitle>
+                                    Description
+                                </StyledTitle>
+                                <StyledTitle>
+                                    Timestamp
+                                </StyledTitle>
+                                <StyledTitle>
+                                    Value
+                                </StyledTitle>
+                            </IconBanner>
+                        }
                         renderItem={({item}) => 
                             <IconBanner>
                                 <StyledText>
@@ -250,7 +264,7 @@ function Home() {
                                     {item.description || "n/a"}
                                 </StyledText>
                                 <StyledText>
-                                    {item.created_at.split("T00:")[0]}
+                                    {item.created_at.split("T")[0]}
                                 </StyledText>
                                 <StyledText>
                                     {item.sender != undefined && item.sender.number == accountNumber ? 
@@ -262,6 +276,7 @@ function Home() {
                             </IconBanner>
                         }
                         keyExtractor={item => item.id.toString()}
+                        showsVerticalScrollIndicator={false}
                         />
 
                         

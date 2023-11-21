@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyledContainer, InputStyled, Label } from './styles'
 
-function Input({type, label, secure}) {
+function Input({type, label, secure, onChangeText, value}) {
     const [text, setText] = useState('');
 
     return(
@@ -9,7 +9,7 @@ function Input({type, label, secure}) {
             <Label>
                 {label}
             </Label>
-            <InputStyled secureTextEntry={secure} keyboardType={type} onChangeText={value => setText(value)} value={text} />
+            <InputStyled secureTextEntry={secure} keyboardType={type} onChangeText={onChangeText} value={value} />
         </StyledContainer>
     )
 }
