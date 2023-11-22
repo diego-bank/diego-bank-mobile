@@ -137,6 +137,10 @@ function Home() {
         navigate('Withdraw');
     };
 
+    function handleNavigationTransaction() {
+        navigate('SearchAccount');
+    };
+
     return(
         <Container>
             {loading ? (
@@ -182,7 +186,7 @@ function Home() {
                         <IconBanner>
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <MaterialCommunityIcons name="bank-transfer" size={50} color="#ffffff" />
+                                    <MaterialCommunityIcons onPress={() => handleNavigationTransaction()} name="bank-transfer" size={50} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Transaction
@@ -254,7 +258,7 @@ function Home() {
                         renderItem={({item}) => 
                             <IconBanner>
                                 <StyledText>
-                                    {item.sender == undefined || item.sender.number == accountNumber ? 
+                                    {item.sender == undefined || (item.recipient != null && item.recipient.number != accountNumber) ? 
                                         item.recipient.user.first_name
                                      : 
                                         item.sender.user.first_name

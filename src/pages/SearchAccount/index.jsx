@@ -7,27 +7,26 @@ import Button from '../../components/Button'
 
 import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
+import { useNavigation } from '@react-navigation/native'
 
-const Withdraw = () => {
+const SearchAccount = () => {
   const [value, setValue] = useState(0)
 
   const accessToken = useAuthStore(state => state.accessToken);
 
-  async function withdraw() {
-    if (value != null && value != ""){
-      const number = Number(value)
+  const {navigate} = useNavigation()
 
-      await api.post('api/v1/accounts/withdraw/', {
-        "value": value,
-      }, {
+  async function searchAccount() {
+    if (value != null && value != ""){
+
+      await api.get(`api/v1/accounts/search/${value}/`, {
         headers: {
           Authorization: "Bearer " + accessToken
       }})
       .then((response) => {
-        console.log(response.data)
-
-        setValue(Number(null))
-        // accountInfo(accountId)
+        navigate("Transaction", {
+          data: response.data
+        })
       })
       .catch((error) => {
         console.log(error)
@@ -39,10 +38,10 @@ const Withdraw = () => {
 
   return (
     <Container>
-      <Input label={'Value'} type={'numeric'} onChangeText={(text) => setValue(text)} value={value} />
-      <Button title={'Make Withdraw'} color={'#8F3CFF'} onPress={() => withdraw()} />
+      <Input label={'Account Number'} type={'numeric'} onChangeText={(text) => setValue(text)} value={value} />
+      <Button title={'Search Account'} color={'#8F3CFF'} onPress={() => searchAccount()} />
     </Container>
   )
 }
 
-export default Withdraw
+export default SearchAccount
