@@ -5,13 +5,16 @@ import Welcome from '../pages/Welcome';
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import Deposit from "../pages/Deposit";
-import Withdraw from "../pages/Withdraw"
+import Withdraw from "../pages/Withdraw";
+import SearchAccount from "../pages/SearchAccount";
+import Transaction from "../pages/Transaction";
+import Loan from "../pages/Loan";
+import MakeLoan from "../pages/MakeLoan";
 
 import Home from "../pages/Home";
 
 import { useAuthStore } from "../stores/authStore";
-import SearchAccount from "../pages/SearchAccount";
-import Transaction from "../pages/Transaction";
+
 
 const Stack = createNativeStackNavigator()
 const InsideStack = createNativeStackNavigator()
@@ -72,6 +75,32 @@ export function AppRoutes() {
                             fontWeight: 'bold',
                         },
                         
+                    }
+                }/>
+                <InsideStack.Screen name="Loan" component={Loan} options={
+                    {
+                        headerShown: true, 
+                        headerStyle: {
+                            backgroundColor: '#171941',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                        
+                    }
+                }/>
+                <InsideStack.Screen name="MakeLoan" component={MakeLoan} options={
+                    {
+                        headerShown: true, 
+                        headerStyle: {
+                            backgroundColor: '#171941',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                        headerTitle: 'Loan',
                     }
                 }/>
             </InsideStack.Navigator>

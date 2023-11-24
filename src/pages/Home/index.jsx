@@ -141,6 +141,10 @@ function Home() {
         navigate('SearchAccount');
     };
 
+    function handleNavigationsLoan() {
+        navigate('Loan');
+    }
+
     return(
         <Container>
             {loading ? (
@@ -213,7 +217,7 @@ function Home() {
 
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <FontAwesome5 name="hand-holding-usd" size={30} color="#ffffff" />
+                                    <FontAwesome5 onPress={() => handleNavigationsLoan()} name="hand-holding-usd" size={30} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Loan
