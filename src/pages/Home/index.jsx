@@ -141,8 +141,12 @@ function Home() {
         navigate('SearchAccount');
     };
 
-    function handleNavigationsLoan() {
+    function handleNavigationLoan() {
         navigate('Loan');
+    }
+
+    function handleNavigationCard() {
+        navigate('Card');
     }
 
     return(
@@ -217,7 +221,7 @@ function Home() {
 
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <FontAwesome5 onPress={() => handleNavigationsLoan()} name="hand-holding-usd" size={30} color="#ffffff" />
+                                    <FontAwesome5 onPress={() => handleNavigationLoan()} name="hand-holding-usd" size={30} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Loan
@@ -226,7 +230,7 @@ function Home() {
  
                             <IconInfo>
                                 <Icon color="#23265A">
-                                    <MaterialCommunityIcons name="card-bulleted" size={50} color="#ffffff" />
+                                    <MaterialCommunityIcons onPress={() => handleNavigationCard()} name="card-bulleted" size={50} color="#ffffff" />
                                 </Icon>
                                 <StyledText>
                                     Card

@@ -10,6 +10,7 @@ import SearchAccount from "../pages/SearchAccount";
 import Transaction from "../pages/Transaction";
 import Loan from "../pages/Loan";
 import MakeLoan from "../pages/MakeLoan";
+import Card from "../pages/Card";
 
 import Home from "../pages/Home";
 
@@ -101,6 +102,19 @@ export function AppRoutes() {
                             fontWeight: 'bold',
                         },
                         headerTitle: 'Loan',
+                    }
+                }/>
+                <InsideStack.Screen name="Card" component={Card} options={
+                    {
+                        headerShown: true, 
+                        headerStyle: {
+                            backgroundColor: '#171941',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                        headerTitle: 'Card',
                     }
                 }/>
             </InsideStack.Navigator>
