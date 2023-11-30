@@ -40,7 +40,7 @@ export const TextLink = styled.Text`
 export const InfoView = styled.View`
     background-color: #23265A;
     width: 90%;
-    height: 530px;
+    height: 600px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
