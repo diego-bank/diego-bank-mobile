@@ -28,7 +28,7 @@ const Card = () => {
 
   async function getTransactions() {
     await api
-      .get(`api/v1/transactions/`, {
+      .get(`api/v1/transactions/card/`, {
         headers: {
           Authorization: "Bearer " + accessToken,
         },

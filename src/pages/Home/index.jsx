@@ -20,7 +20,7 @@ import { useFocusEffect } from "@react-navigation/native";
 
 function Home() {
     const [loading, setLoading] = useState(true);
-    const [transactions, setTransactions] = useState([])
+    const [transactions, setTransactions] = useState([]);
 
     const setUserInformation = useUserStore(state => state.setUserInformation);
     const setAccountInformation = useAccountStore(state => state.setAccountInformation);
@@ -45,7 +45,11 @@ function Home() {
             const first_name = response.data.first_name
             const last_name = response.data.last_name
             const cpf = response.data.cpf
-            const url_image = response.data.url_image
+            const url_image = 'https://reactnative.dev/docs/assets/p_cat2.png'
+            if (response.data.url_image) {
+                const url_image = response.data.url_image
+            }
+            
 
             setUserInformation(
                 email,
@@ -149,6 +153,10 @@ function Home() {
         navigate('Card');
     }
 
+    function handleNavigationProfile() {
+        navigate('Profile');
+    }
+
     return(
         <Container>
             {loading ? (
@@ -157,7 +165,7 @@ function Home() {
                 <>
                 <Header>
                         <LogoSmall source={require('../../../assets/logo.png')} />
-                        <FontAwesome name="user" size={30} color="#ffffff" onPress={() => {}}/>
+                        <FontAwesome name="user" size={30} color="#ffffff" onPress={() => {handleNavigationProfile()}}/>
                 </Header>
                 <Main>
                         <StyledTitle>

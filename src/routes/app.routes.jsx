@@ -11,8 +11,8 @@ import Transaction from "../pages/Transaction";
 import Loan from "../pages/Loan";
 import MakeLoan from "../pages/MakeLoan";
 import Card from "../pages/Card";
-
 import Home from "../pages/Home";
+import Profile from "../pages/Profile";
 
 import { useAuthStore } from "../stores/authStore";
 
@@ -117,6 +117,18 @@ export function AppRoutes() {
                         headerTitle: 'Card',
                     }
                 }/>
+                <InsideStack.Screen name="Profile" component={Profile} options={
+                    {
+                        headerShown: true, 
+                        headerStyle: {
+                            backgroundColor: '#171941',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                    }
+                } />
             </InsideStack.Navigator>
         ) : (<Stack.Navigator initialRouteName="Welcome" screenOptions={{headerShown: false}}>
                 <Stack.Screen name='Welcome' component={Welcome} />
