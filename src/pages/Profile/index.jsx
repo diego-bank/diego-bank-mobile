@@ -12,7 +12,7 @@ import {
   StyledTitle,
 } from "./styles";
 import * as ImagePicker from "expo-image-picker";
-import { api } from '../../services/api'
+import { api, BASE_URL } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
 
 function Profile() {
@@ -44,14 +44,14 @@ function Profile() {
     formData.append('first_name', varFirstName)
     formData.append('last_name', varLastName)
     formData.append('cpf', varCpf)
-    formData.append('email', varCpf)
-    formData.append('url_image', {uri: varUrlImage, name: `image_${first_name}_${last_name}`, type: 'image/jpeg' })
+    formData.append('email', varEmail)
+    formData.append('url_image', {uri: varUrlImage, name: `image_${first_name}_${last_name}.jpg`, type: 'image/jpg' })
 
     await api.put('api/v1/user/update/', formData, {
         headers: {
             Authorization: "Bearer " + accessToken,
-            'Content-Type': 'multipart/form-data',
-            'Accept': 'application/json',
+            "Content-Type": 'multipart/form-data',
+            Accept: 'application/json',
         }
     })
     .then((response) => {

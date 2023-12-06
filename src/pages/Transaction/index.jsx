@@ -7,11 +7,13 @@ import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
+import { Switch, View } from 'react-native'
+
 const Transaction = ({route}) => {
   const [value, setValue] = useState(0)
   const [description, setDescription] = useState("")
   const [card, setCard] = useState(null)
-  const [useCard, setUseCard] = useState(0)
+  const [useCard, setUseCard] = useState(true)
 
   const {data} = route.params;
 
@@ -75,7 +77,10 @@ const Transaction = ({route}) => {
           <Input label={'Email'} value={data.user.email} editable={false}/>
           <Input label={'Value'} type={'numeric'} onChangeText={(text) => setValue(text)} value={value}/>
           <Input label={'Description'} type={'default'} onChangeText={(text) => setDescription(text)} value={description}/>
-          <Input label={'Use Card'} type={'numeric'} onChangeText={(text) => setUseCard(text)} value={useCard}/>
+          <InfoMin>
+            <StyledText>Card</StyledText>
+            <Switch onValueChange={() => setUseCard(!useCard)} value={useCard}/>
+          </InfoMin>
       </InfoView>
 
       

@@ -45,10 +45,8 @@ function Home() {
             const first_name = response.data.first_name
             const last_name = response.data.last_name
             const cpf = response.data.cpf
-            const url_image = 'https://reactnative.dev/docs/assets/p_cat2.png'
-            if (response.data.url_image) {
-                const url_image = response.data.url_image
-            }
+            const url_image = response.data.url_image || 'https://reactnative.dev/docs/assets/p_cat2.png'
+        
             
 
             setUserInformation(
