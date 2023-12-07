@@ -7,6 +7,7 @@ import Button from '../../components/Button'
 
 import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
+import Toast from 'react-native-toast-message'
 
 const MakeLoan = () => {
   const [value, setValue] = useState(0)
@@ -30,9 +31,20 @@ const MakeLoan = () => {
 
         setValue(Number(null))
         setPayments(Number(null))
+
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: response.data
+        });
       })
       .catch((error) => {
         console.log(error)
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: e
+        });
       })
     } else {
       console.log(value)

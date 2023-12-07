@@ -14,6 +14,8 @@ import { useUserStore } from "../../stores/userStore";
 import { useAccountStore } from "../../stores/accountStore";
 import { api } from "../../services/api";
 
+import Toast from 'react-native-toast-message';
+
 const Card = () => {
   const [card, setCard] = useState(0);
   const [transactions, setTransactions] = useState([]);
@@ -85,9 +87,19 @@ const Card = () => {
       )
       .then((response) => {
         console.log(response);
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Now you have a card!'
+        });
         getCard();
       })
       .catch((response) => {
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: e
+        });
         console.log(response);
       });
   }

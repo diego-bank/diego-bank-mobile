@@ -6,6 +6,7 @@ import TextInputStyled from "../../components/TextInputStyled";
 
 import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
+import Toast from "react-native-toast-message";
 
 function Login() {
     const setAccessToken = useAuthStore(state => state.setAccessToken);
@@ -32,9 +33,19 @@ function Login() {
 
             setAccessToken(accessToken);
             setRefreshToken(refreshToken);
+            Toast.show({
+                type: 'success',
+                text1: 'Success',
+                text2: 'You are Logged in!'
+              });
         })
         .catch((e) => {
             console.log(e);
+            Toast.show({
+                type: 'error',
+                text1: 'Error',
+                text2: e
+              });
         })
     }
 

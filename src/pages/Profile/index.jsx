@@ -14,6 +14,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { api, BASE_URL } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
+import Toast from "react-native-toast-message";
 
 function Profile() {
   const first_name = useUserStore((state) => state.first_name);
@@ -56,9 +57,19 @@ function Profile() {
     })
     .then((response) => {
         console.log(response.status)
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Profile updated'
+        });
     })
     .catch((e) => {
         console.log(e);
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: e
+        });
     })
 }
 

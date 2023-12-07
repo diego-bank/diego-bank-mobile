@@ -7,6 +7,7 @@ import Button from '../../components/Button'
 
 import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
+import Toast from 'react-native-toast-message'
 
 const Withdraw = () => {
   const [value, setValue] = useState(0)
@@ -26,11 +27,22 @@ const Withdraw = () => {
       .then((response) => {
         console.log(response.data)
 
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: response.data
+        });
+
         setValue(Number(null))
         // accountInfo(accountId)
       })
       .catch((error) => {
         console.log(error)
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: error
+        });
       })
     } else {
       console.log(value)

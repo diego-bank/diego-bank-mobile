@@ -8,6 +8,7 @@ import Button from '../../components/Button'
 import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
 import { useAccountStore } from '../../stores/accountStore'
+import Toast from 'react-native-toast-message'
 
 const Deposit = () => {
   const [value, setValue] = useState(0)
@@ -28,12 +29,21 @@ const Deposit = () => {
       }})
       .then((response) => {
         console.log(response.data)
-
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: response.data
+        });
         setValue(Number(null))
         // accountInfo(accountId)
       })
       .catch((error) => {
         console.log(error)
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: e
+        });
       })
     } else {
       console.log(value)

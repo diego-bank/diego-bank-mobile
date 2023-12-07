@@ -8,6 +8,7 @@ import Button from '../../components/Button'
 import { api } from '../../services/api'
 import { useAuthStore } from "../../stores/authStore";
 import { useNavigation } from '@react-navigation/native'
+import Toast from 'react-native-toast-message'
 
 const SearchAccount = () => {
   const [value, setValue] = useState(0)
@@ -30,6 +31,11 @@ const SearchAccount = () => {
       })
       .catch((error) => {
         console.log(error)
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: error
+        });
       })
     } else {
       console.log(value)

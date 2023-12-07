@@ -8,6 +8,7 @@ import { useAuthStore } from "../../stores/authStore";
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import { Switch, View } from 'react-native'
+import Toast from 'react-native-toast-message'
 
 const Transaction = ({route}) => {
   const [value, setValue] = useState(0)
@@ -57,10 +58,20 @@ const Transaction = ({route}) => {
       }})
       .then((response) => {
         console.log(response.data)
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: response.data
+        });
         navigate("Home")
       })
       .catch((error) => {
         console.log(error)
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: error
+        });
       })
     } else {
       console.log(value)
