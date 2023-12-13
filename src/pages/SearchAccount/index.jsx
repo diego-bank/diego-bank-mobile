@@ -34,7 +34,7 @@ const SearchAccount = () => {
         Toast.show({
           type: 'error',
           text1: 'Error',
-          text2: error
+          text2: Object.values(error.response.data)[0]
         });
       })
     } else {

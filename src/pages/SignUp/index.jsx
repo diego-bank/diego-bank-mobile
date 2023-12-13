@@ -50,7 +50,7 @@ function SignUp() {
         Toast.show({
           type: "error",
           text1: "Error",
-          text2: e,
+          text2: Object.values(e.response.data)[0],
         });
       });
   }

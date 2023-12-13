@@ -42,7 +42,7 @@ const Deposit = () => {
         Toast.show({
           type: 'error',
           text1: 'Error',
-          text2: e
+          text2: Object.values(error.response.data)[0]
         });
       })
     } else {
